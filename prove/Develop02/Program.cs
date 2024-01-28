@@ -1,19 +1,13 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
 
-/* Exceeding requirements 
-Attempted to Improve the process of saving and loading to 
-save as a .csv file that could be opened in Excel (make sure to 
-account for quotation marks and commas correctly in your 
- content.
- */
+
 
 
 class Program
 {
     static void Main(string[] args)
     {
+        // Console.WriteLine("Hello Develop02 World!");
         Journal journal = new Journal();
         Console.WriteLine("Welcome to the Journal Program!");
 
@@ -31,21 +25,25 @@ class Program
             Console.WriteLine();
 
             switch (choice)
-            {
+            {   
+                //Write
                 case 1:
                     journal.NewEntry();
                     Console.WriteLine();
                     break;
+                //Display
                 case 2:
                     journal.DisplayEntries();
                     Console.WriteLine();
                     break;
+                //Load
                 case 3:
                     Console.Write("Enter the file name you want to load: ");
                     string loadFileName = Console.ReadLine();
                     journal.LoadEntries(loadFileName);
                     Console.WriteLine();
                     break;
+                //Save
                 case 4:
                     Console.Write("Enter the file name you want to save: ");
                     string saveFileName = Console.ReadLine();
@@ -53,6 +51,7 @@ class Program
                     Console.WriteLine("Saved!");
                     Console.WriteLine();
                     break;
+                //Quit
                 case 5:
                     running = false;
                     Console.WriteLine("Thank you. Have a nice day!");

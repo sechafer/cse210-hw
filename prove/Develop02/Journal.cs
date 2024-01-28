@@ -1,80 +1,76 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
 
-// Clase para representar el diario
 public class Journal
 {
-    public List<Entry> Entries { get; set; } = new List<Entry>();
 
-    // Agrega una nueva entrada al diario
+    public List<Entry> _entries = new List<Entry>();
     public void NewEntry()
     {
         Entry userEntry = new Entry();
         userEntry.GenerateDate();
         userEntry.GeneratePrompt();
         userEntry.GetResponse();
-        Entries.Add(userEntry);
+        _entries.Add(userEntry);
     }
 
-    // Muestra todas las entradas del diario
     public void DisplayEntries()
     {
-        foreach (Entry entry in Entries)
+        foreach (Entry entry in _entries)
         {
-            Console.WriteLine($"Date: {entry.Date}");
-            Console.WriteLine($"Prompt: {entry.Prompt}");
-            Console.WriteLine($"{entry.Response}");
+            Console.WriteLine($"Date: {entry._date}");
+            Console.WriteLine($"Prompt: {entry._prompt}");
+            Console.WriteLine($"{entry._response}");
             Console.WriteLine();
         }
     }
 
-    // Carga entradas desde un archivo
     public void LoadEntries(string filename)
     {
-        Entries.Clear(); // Limpiar entradas actuales antes de cargar nuevas
-
         if (filename.EndsWith(".csv"))
         {
-            string[] lines = File.ReadAllLines(filename);
+            string[] lines = System.IO.File.ReadAllLines(filename);
             foreach (string line in lines)
             {
                 string[] parts = line.Split(",");
                 string date = parts[0];
                 string prompt = parts[1];
                 string response = parts[2];
-
-                Entry loadedEntry = new Entry
-                {
-                    Date = date,
-                    Prompt = prompt,
-                    Response = response
-                };
-
-                Entries.Add(loadedEntry);
+                Console.WriteLine($"Date: {date}");
+                Console.WriteLine($"Prompt: {prompt}");
+                Console.WriteLine($"{response}");
+                Console.WriteLine();
             }
         }
         else
         {
-            // Cargar desde otro formato si es necesario
+            using (StreamReader reader = new StreamReader(filename))
+            {
+                String journalEntries = reader.ReadToEnd();
+                Console.Write(journalEntries);
+            }
         }
     }
 
-    // Guarda entradas en un archivo
     public void SaveEntries(string filename)
     {
-        using (StreamWriter outputFile = new StreamWriter(filename))
+        using (StreamWriter outputFile = new StreamWriter(filename, true))
         {
             if (filename.EndsWith(".csv"))
             {
-                foreach (Entry entry in Entries)
+                foreach (Entry entry in _entries)
                 {
-                    outputFile.WriteLine($"{entry.Date},{entry.Prompt},{entry.Response}");
+                    outputFile.WriteLine($"{entry._date},{entry._prompt},{entry._response}");
                 }
             }
             else
             {
-                // Guardar en otro formato si es necesario
+                foreach (Entry entry in _entries)
+                {
+                    outputFile.WriteLine($"Date:{entry._date},{entry._prompt},{entry._response}");
+                    outputFile.WriteLine($"Prompt:{entry._prompt}");
+                    outputFile.WriteLine($"{entry._response}");
+                    outputFile.WriteLine();
+                }
             }
         }
     }
