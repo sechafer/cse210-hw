@@ -4,7 +4,7 @@ using System.IO;
 using Newtonsoft.Json;
 
 //Operating requirements you must install the Newtonsoft.Json library to make it easier to use nuget gallery puging within VsCode
-//Download the script file to the address C:\ (this file will be shown only in canvas, the repository will not be uploaded). 
+//Download the script file to the address C:\ lds-scriptures-json.txt). 
 //If you place it somewhere else, please enter the correct address where the lds-scriptures-json.txt file will be located. 
 //This is defaulted to capture max 5 random verses and will display once per screen. /
 
