@@ -1,0 +1,3 @@
+Read Scriptures,Read scriptures daily,100
+Run Marathon,Complete a marathon,1000
+Attend Temple,Attend temple 10 times,50
